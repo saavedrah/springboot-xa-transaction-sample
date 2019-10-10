@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- http://commons.apache.org/proper/commons-dbcp/configuration.html -->
+    <bean id="application" primary="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="com.arjuna.ats.jdbc.TransactionalDriver" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/scuserapp" />
+        <property name="username" value="scuserapp" />
+        <property name="password" value="scuserapppw" />
+        <!-- NG       <property name="defaultAutoCommit" value="false" />-->
+        <property name="initialSize" value="10" />
+        <property name="maxActive" value="20" />
+        <property name="maxIdle" value="0" />
+        <property name="defaultTransactionIsolation" value="2" />
+    </bean>
+
+    <!-- Transacion Manager -->
+    <bean id="arjunaTransactionManager" class="com.arjuna.ats.jta.TransactionManager" factory-method="transactionManager">
+        <property name="transactionTimeout" value="80"/>
+    </bean>
+
+    <bean id="arjunaUserTransaction" class="com.arjuna.ats.jta.UserTransaction" factory-method="userTransaction" />
+
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="transactionManager">
+            <ref bean="arjunaTransactionManager" />
+        </property>
+        <property name="userTransaction">
+            <ref bean="arjunaUserTransaction" />
+        </property>
+    </bean>
+
+</beans>
