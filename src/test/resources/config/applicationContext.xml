@@ -6,28 +6,6 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- http://commons.apache.org/proper/commons-dbcp/configuration.html -->
-<!--    <bean id="application" primary="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-<!--        <property name="driverClassName" value="com.arjuna.ats.jdbc.TransactionalDriver" />-->
-<!--        <property name="url" value="jdbc:postgresql://localhost:5432/scuserapp" />-->
-<!--        <property name="username" value="scuserapp" />-->
-<!--        <property name="password" value="scuserapppw" />-->
-<!--        &lt;!&ndash; NG       <property name="defaultAutoCommit" value="false" />&ndash;&gt;-->
-<!--        <property name="initialSize" value="10" />-->
-<!--        <property name="maxActive" value="20" />-->
-<!--        <property name="maxIdle" value="0" />-->
-<!--        <property name="defaultTransactionIsolation" value="2" />-->
-<!--    </bean>-->
-
-<!--    <bean id="application" primary="true" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
-<!--        <property name="driverClassName" value="oracle.jdbc.OracleDriver" />-->
-<!--        <property name="url" value="jdbc:oracle:thin:@localhost:1522:xe" />-->
-<!--        <property name="username" value="MONOTESTAPPSCHEMA" />-->
-<!--        <property name="password" value="PWMONOTESTAPPSCHEMA" />-->
-<!--        <property name="initialSize" value="5" />-->
-<!--        <property name="maxActive" value="11" />-->
-<!--        <property name="maxIdle" value="0" />-->
-<!--    </bean>-->
 
     <beans profile="nonXA-test">
         <bean id="application" primary="true" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">

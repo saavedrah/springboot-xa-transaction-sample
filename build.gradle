@@ -13,13 +13,23 @@ repositories {
 }
 
 dependencies {
-//	compile fileTree(dir: 'ext-lib', include: '*.jar')
+	implementation fileTree(dir: 'ext-lib', include: '*.jar')
 
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.postgresql:postgresql'
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jta-narayana', version: '2.0.9.RELEASE'
-	compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+	implementation 'org.postgresql:postgresql'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-jta-narayana', version: '2.0.9.RELEASE'
+	implementation group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+
+	// Spring Data JPA
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation("junit:junit")
+}
+
+test {
+	// This test case fails when run from the command line
+	// because the data source definition changes
+	exclude '**/XATransactionSampleApplicationTests.class'
 }
